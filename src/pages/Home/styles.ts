@@ -95,4 +95,8 @@ export const CoffeeFeature = styled(BaseFeature)`
 
 export const CoffeeList = styled.div`
   margin-top: 2rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 `;
