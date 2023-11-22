@@ -1,12 +1,20 @@
 import styled from "styled-components";
+import backgroundImage from "../../assets/bg-image.png";
 
 export const HomeContainer = styled.main``;
 
 export const IntroContainer = styled.div`
-  margin: 5.75rem 0;
-
   display: flex;
   gap: 3.5rem;
+
+  background-image: url(${backgroundImage});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  padding: 5.75rem 10rem;
+
+  margin: 0 -10rem;
 
   img {
     width: 29.75rem;
@@ -94,7 +102,7 @@ export const CoffeeFeature = styled(BaseFeature)`
 `;
 
 export const CoffeeList = styled.div`
-  margin-top: 2rem;
+  padding: 3.25rem 0 9.75rem;
 
   display: flex;
   flex-wrap: wrap;
