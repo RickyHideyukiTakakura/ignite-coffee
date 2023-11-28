@@ -28,6 +28,7 @@ export const CoffeeCardContainer = styled.div`
     background: ${(props) => props.theme["yellow-light"]};
     color: ${(props) => props.theme["yellow-dark"]};
 
+    text-transform: uppercase;
     font-size: 0.625rem;
     line-height: 130%;
 

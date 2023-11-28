@@ -7,9 +7,9 @@ import {
   Trash,
 } from "phosphor-react";
 import CoffeeImage from "../../assets/express-coffee.png";
-import { ButtonSelect } from "../../components/ButtonSelect";
 import { InputNumber } from "../../components/InputNumber";
 import { InputText } from "../../components/InputText";
+import { Radio } from "../../components/Radio";
 import {
   Address,
   AddressAndPaymentContainer,
@@ -79,18 +79,18 @@ export function Checkout() {
             </PaymentInfo>
 
             <PaymentMethod>
-              <ButtonSelect>
+              <Radio isSelected>
                 <CreditCard />
-                CARTÃO DE CRÉDITO
-              </ButtonSelect>
-              <ButtonSelect>
+                Cartão de crédito
+              </Radio>
+              <Radio>
                 <Bank />
-                CARTÃO DE DÉBITO
-              </ButtonSelect>
-              <ButtonSelect>
+                Cartão de débito
+              </Radio>
+              <Radio>
                 <Money />
-                DINHEIRO
-              </ButtonSelect>
+                Dinheiro
+              </Radio>
             </PaymentMethod>
           </Payment>
         </AddressAndPaymentContainer>
@@ -112,7 +112,7 @@ export function Checkout() {
 
                     <DeleteCoffeeButton>
                       <Trash size={16} />
-                      REMOVER
+                      Remover
                     </DeleteCoffeeButton>
                   </CoffeeActions>
                 </div>
@@ -164,7 +164,7 @@ export function Checkout() {
             </div>
           </Total>
 
-          <ConfirmOrderButton>CONFIRMAR PEDIDO</ConfirmOrderButton>
+          <ConfirmOrderButton>Confirmar Pedido</ConfirmOrderButton>
         </Cart>
       </SectionContainer>
     </CheckoutContainer>

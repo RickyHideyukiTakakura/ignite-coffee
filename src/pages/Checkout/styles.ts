@@ -132,7 +132,7 @@ export const PaymentMethod = styled.div`
   align-items: center;
   gap: 0.75rem;
 
-  button {
+  div {
     flex: 1;
   }
 `;
@@ -181,6 +181,7 @@ export const ConfirmOrderButton = styled.button`
   background: ${(props) => props.theme["yellow"]};
   color: ${(props) => props.theme["white"]};
 
+  text-transform: uppercase;
   font-size: 0.875rem;
   line-height: 160%;
 
@@ -242,10 +243,11 @@ export const DeleteCoffeeButton = styled.button`
   border: none;
   border-radius: 6px;
   background: ${(props) => props.theme["base-button"]};
+  color: ${(props) => props.theme["base-text"]};
 
+  text-transform: uppercase;
   font-size: 0.75rem;
   line-height: 160%;
-  color: ${(props) => props.theme["base-text"]};
 
   transition: all 0.5s;
 

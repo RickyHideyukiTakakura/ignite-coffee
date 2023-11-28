@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ButtonSelectContainer = styled.button`
+export const RadioContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -12,8 +12,11 @@ export const ButtonSelectContainer = styled.button`
   background: ${(props) => props.theme["base-button"]};
   color: ${(props) => props.theme["base-text"]};
 
+  text-transform: uppercase;
   font-size: 0.75rem;
   line-height: 160%;
+
+  cursor: pointer;
 
   transition: background-color 0.5s;
 
@@ -24,6 +27,16 @@ export const ButtonSelectContainer = styled.button`
 
   &:hover {
     background: ${(props) => props.theme["base-hover"]};
+  }
+
+  &[data-state="true"] {
+    background: ${(props) => props.theme["purple-light"]};
+    outline: 0;
+    box-shadow: 0 0 0 1px ${(props) => props.theme["purple"]};
+  }
+
+  input {
+    display: none;
   }
 
   svg {
