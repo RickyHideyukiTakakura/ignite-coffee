@@ -1,4 +1,12 @@
-import { CurrencyDollar, MapPin } from "phosphor-react";
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPin,
+  Money,
+} from "phosphor-react";
+import { ButtonSelect } from "../../components/ButtonSelect";
+import { InputText } from "../../components/InputText";
 import {
   Address,
   AddressAndPaymentContainer,
@@ -30,21 +38,21 @@ export function Checkout() {
             </AddressInfo>
 
             <AddressForm>
-              <input className="zip-code" type="text" placeholder="CEP" />
-              <input className="street" type="text" placeholder="Rua" />
-              <input className="number" type="text" placeholder="Número" />
-              <input
+              <InputText className="zip-code" type="text" placeholder="CEP" />
+              <InputText className="street" type="text" placeholder="Rua" />
+              <InputText className="number" type="text" placeholder="Número" />
+              <InputText
                 className="complement"
                 type="text"
                 placeholder="Complemento"
               />
-              <input
+              <InputText
                 className="neighborhood"
                 type="text"
                 placeholder="Bairro"
               />
-              <input className="city" type="text" placeholder="Cidade" />
-              <input className="state" type="text" placeholder="UF" />
+              <InputText className="city" type="text" placeholder="Cidade" />
+              <InputText className="state" type="text" placeholder="UF" />
             </AddressForm>
           </Address>
 
@@ -61,9 +69,18 @@ export function Checkout() {
             </PaymentInfo>
 
             <PaymentMethod>
-              <button>Cartao 1</button>
-              <button>Cartao 2</button>
-              <button>Cartao 3</button>
+              <ButtonSelect>
+                <CreditCard />
+                CARTÃO DE CRÉDITO
+              </ButtonSelect>
+              <ButtonSelect>
+                <Bank />
+                CARTÃO DE DÉBITO
+              </ButtonSelect>
+              <ButtonSelect>
+                <Money />
+                DINHEIRO
+              </ButtonSelect>
             </PaymentMethod>
           </Payment>
         </AddressAndPaymentContainer>

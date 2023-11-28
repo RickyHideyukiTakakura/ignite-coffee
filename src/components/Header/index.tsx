@@ -12,7 +12,9 @@ export function Header() {
 
   return (
     <HeaderContainer>
-      <img src={Logo} alt="" />
+      <a href="/">
+        <img src={Logo} alt="" />
+      </a>
 
       <Navigation>
         <Location>

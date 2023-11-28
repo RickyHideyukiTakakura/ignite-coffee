@@ -85,12 +85,6 @@ export const AddressForm = styled.form`
 
   gap: 1rem 0.75rem;
 
-  /* grid-template-areas:
-    "cep undefined undefined"
-    "street street street"
-    "number complement complement"
-    "neighborhood city uf"; */
-
   .zip-code {
     grid-column: 1;
     grid-row: 1;
