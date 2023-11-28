@@ -65,25 +65,15 @@ export const BuyContainer = styled.div`
     line-height: 130%;
 
     color: ${(props) => props.theme["base-text"]};
+
+    margin-right: 1.5rem;
+
+    strong {
+      font-size: 1.5rem;
+    }
   }
 
-  strong {
-    font-size: 1.5rem;
-  }
-
-  div {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    border-radius: 6px;
-    background: ${(props) => props.theme["base-button"]};
-    padding: 0.5rem;
-
-    margin-left: 1.5rem;
-    margin-right: 0.5rem;
-  }
-
-  button {
+  div + button {
     display: flex;
 
     padding: 0.5rem;
@@ -92,8 +82,16 @@ export const BuyContainer = styled.div`
     border: none;
     border-radius: 6px;
 
+    margin-left: 0.5rem;
+
+    transition: all 0.5s;
+
     svg {
       color: ${(props) => props.theme["white"]};
+    }
+
+    &:hover {
+      background: ${(props) => props.theme["purple"]};
     }
   }
 `;

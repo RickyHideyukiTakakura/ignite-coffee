@@ -15,7 +15,7 @@ export const ButtonSelectContainer = styled.button`
   font-size: 0.75rem;
   line-height: 160%;
 
-  transition: background-color 0.2s;
+  transition: background-color 0.5s;
 
   &:focus {
     outline: 0;

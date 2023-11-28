@@ -39,8 +39,12 @@ export const Payment = styled.div`
 `;
 
 export const Cart = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
   width: 28rem;
-  height: 31.25rem;
+  padding: 2.5rem;
 
   border-radius: 6px 44px 6px 44px;
 
@@ -138,8 +142,6 @@ export const Total = styled.div`
   flex-direction: column;
   gap: 0.75rem;
 
-  padding: 2.5rem;
-
   div {
     display: flex;
     align-items: center;
@@ -164,4 +166,103 @@ export const Total = styled.div`
       color: ${(props) => props.theme["base-subtitle"]};
     }
   }
+`;
+
+export const ConfirmOrderButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.75rem 0;
+
+  border: none;
+  border-radius: 6px;
+
+  background: ${(props) => props.theme["yellow"]};
+  color: ${(props) => props.theme["white"]};
+
+  font-size: 0.875rem;
+  line-height: 160%;
+
+  transition: all 0.5s;
+
+  &:hover {
+    background: ${(props) => props.theme["yellow-dark"]};
+  }
+`;
+
+export const CoffeeCardContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.25rem;
+
+  strong {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 130%;
+    color: ${(props) => props.theme["base-text"]};
+  }
+`;
+
+export const CoffeeInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+
+  img {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    span {
+      line-height: 130%;
+      color: ${(props) => props.theme["base-subtitle"]};
+    }
+  }
+`;
+
+export const CoffeeActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const DeleteCoffeeButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  padding: 0.5rem;
+
+  border: none;
+  border-radius: 6px;
+  background: ${(props) => props.theme["base-button"]};
+
+  font-size: 0.75rem;
+  line-height: 160%;
+  color: ${(props) => props.theme["base-text"]};
+
+  transition: all 0.5s;
+
+  &:hover {
+    background: ${(props) => props.theme["base-hover"]};
+  }
+
+  svg {
+    color: ${(props) => props.theme["purple"]};
+  }
+`;
+
+export const Separator = styled.div`
+  height: 1px;
+  width: 100%;
+
+  /* margin: 1.5rem 0; */
+
+  background: ${(props) => props.theme["base-button"]};
 `;

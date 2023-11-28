@@ -1,21 +1,41 @@
 import styled from "styled-components";
 
-export const InputTextContainer = styled.input`
+export const InputTextContainer = styled.div`
   width: 100%;
-  position: relative;
 
-  padding: 0.75rem;
+  display: flex;
+  align-items: center;
 
   background: ${(props) => props.theme["base-input"]};
-  color: ${(props) => props.theme["base-text"]};
 
   border: 1px solid ${(props) => props.theme["base-button"]};
   border-radius: 4px;
 
-  font-size: 0.875rem;
-  line-height: 130%;
+  & > input {
+    width: 100%;
+    padding: 0.75rem;
 
-  &::placeholder {
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+
+    font-size: 0.875rem;
+    line-height: 130%;
+
+    color: ${(props) => props.theme["base-text"]};
+
+    &::placeholder {
+      color: ${(props) => props.theme["base-label"]};
+    }
+  }
+
+  span {
+    padding: 0 0.75rem;
+
+    font-size: 0.75rem;
+    font-style: italic;
+    line-height: 130%;
+
     color: ${(props) => props.theme["base-label"]};
   }
 `;

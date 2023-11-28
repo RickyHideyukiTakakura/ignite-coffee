@@ -1,5 +1,6 @@
 import { ShoppingCart } from "phosphor-react";
 import ExpressCoffeeImage from "../../assets/express-coffee.png";
+import { InputNumber } from "../InputNumber";
 import { BuyContainer, CoffeeCardContainer } from "./styles";
 
 export function CoffeeCard() {
@@ -14,11 +15,7 @@ export function CoffeeCard() {
         <span>
           R$ <strong>9,90</strong>
         </span>
-        <div>
-          <span>+</span>
-          <span>1</span>
-          <span>-</span>
-        </div>
+        <InputNumber />
         <button>
           <ShoppingCart size={22} weight="fill" />
         </button>

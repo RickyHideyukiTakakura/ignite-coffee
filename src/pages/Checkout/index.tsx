@@ -4,8 +4,11 @@ import {
   CurrencyDollar,
   MapPin,
   Money,
+  Trash,
 } from "phosphor-react";
+import CoffeeImage from "../../assets/express-coffee.png";
 import { ButtonSelect } from "../../components/ButtonSelect";
+import { InputNumber } from "../../components/InputNumber";
 import { InputText } from "../../components/InputText";
 import {
   Address,
@@ -14,10 +17,16 @@ import {
   AddressInfo,
   Cart,
   CheckoutContainer,
+  CoffeeActions,
+  CoffeeCardContainer,
+  CoffeeInfo,
+  ConfirmOrderButton,
+  DeleteCoffeeButton,
   Payment,
   PaymentInfo,
   PaymentMethod,
   SectionContainer,
+  Separator,
   Total,
 } from "./styles";
 
@@ -45,6 +54,7 @@ export function Checkout() {
                 className="complement"
                 type="text"
                 placeholder="Complemento"
+                optional
               />
               <InputText
                 className="neighborhood"
@@ -89,7 +99,55 @@ export function Checkout() {
       <SectionContainer>
         <strong>Cafés selecionados</strong>
         <Cart>
-          <div></div>
+          <>
+            <CoffeeCardContainer>
+              <CoffeeInfo>
+                <img src={CoffeeImage} alt="" />
+
+                <div>
+                  <span>Expresso Tradicional</span>
+
+                  <CoffeeActions>
+                    <InputNumber />
+
+                    <DeleteCoffeeButton>
+                      <Trash size={16} />
+                      REMOVER
+                    </DeleteCoffeeButton>
+                  </CoffeeActions>
+                </div>
+              </CoffeeInfo>
+
+              <strong>$ 9,90</strong>
+            </CoffeeCardContainer>
+
+            <Separator />
+          </>
+
+          <>
+            <CoffeeCardContainer>
+              <CoffeeInfo>
+                <img src={CoffeeImage} alt="" />
+
+                <div>
+                  <span>Expresso Tradicional</span>
+
+                  <CoffeeActions>
+                    <InputNumber />
+
+                    <DeleteCoffeeButton>
+                      <Trash size={16} />
+                      REMOVER
+                    </DeleteCoffeeButton>
+                  </CoffeeActions>
+                </div>
+              </CoffeeInfo>
+
+              <strong>$ 9,90</strong>
+            </CoffeeCardContainer>
+
+            <Separator />
+          </>
 
           <Total>
             <div>
@@ -105,6 +163,8 @@ export function Checkout() {
               <strong>R$ 33,20</strong>
             </div>
           </Total>
+
+          <ConfirmOrderButton>CONFIRMAR PEDIDO</ConfirmOrderButton>
         </Cart>
       </SectionContainer>
     </CheckoutContainer>
