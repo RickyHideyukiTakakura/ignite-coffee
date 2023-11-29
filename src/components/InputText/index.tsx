@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from "react";
-import { InputTextContainer } from "./styles";
+import * as S from "./styles";
 
 interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -8,9 +8,9 @@ interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function InputText({ className, optional, ...rest }: InputTextProps) {
   return (
-    <InputTextContainer className={className}>
+    <S.InputTextContainer className={className}>
       <input {...rest} type="text" />
       {optional && <span>Opcional</span>}
-    </InputTextContainer>
+    </S.InputTextContainer>
   );
 }

@@ -1,65 +1,55 @@
 import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react";
 import CoffeeHomeImage from "../../assets/coffee-home.png";
 import { CoffeeCard } from "../../components/CoffeeCard";
-import {
-  CoffeeFeature,
-  CoffeeList,
-  FeaturesContainer,
-  HomeContainer,
-  IntroContainer,
-  IntroContent,
-  PackageFeature,
-  ShoppingFeature,
-  TimerFeature,
-} from "./styles";
+import * as S from "./styles";
 
 export function Home() {
   return (
-    <HomeContainer>
-      <IntroContainer>
-        <IntroContent>
+    <S.HomeContainer>
+      <S.IntroContainer>
+        <S.IntroContent>
           <h1>Encontre o café perfeito para qualquer hora do dia</h1>
           <p>
             Com o Coffee Delivery você recebe seu café onde estiver, a qualquer
             hora
           </p>
 
-          <FeaturesContainer>
-            <ShoppingFeature>
+          <S.FeaturesContainer>
+            <S.ShoppingFeature>
               <div>
                 <ShoppingCart weight="fill" />
               </div>
               <span>Compra simples e segura</span>
-            </ShoppingFeature>
+            </S.ShoppingFeature>
 
-            <PackageFeature>
+            <S.PackageFeature>
               <div>
                 <Package weight="fill" />
               </div>
               <span>Embalagem mantém o café intacto</span>
-            </PackageFeature>
+            </S.PackageFeature>
 
-            <TimerFeature>
+            <S.TimerFeature>
               <div>
                 <Timer weight="fill" />
               </div>
               <span>Entrega rápida e rastreada</span>
-            </TimerFeature>
+            </S.TimerFeature>
 
-            <CoffeeFeature>
+            <S.CoffeeFeature>
               <div>
                 <Coffee weight="fill" />
               </div>
               <span>Compra simples e segura</span>
-            </CoffeeFeature>
-          </FeaturesContainer>
-        </IntroContent>
+            </S.CoffeeFeature>
+          </S.FeaturesContainer>
+        </S.IntroContent>
 
         <img src={CoffeeHomeImage} alt="" />
-      </IntroContainer>
+      </S.IntroContainer>
 
       <h2>Nossos cafés</h2>
-      <CoffeeList>
+      <S.CoffeeList>
         <CoffeeCard />
         <CoffeeCard />
         <CoffeeCard />
@@ -72,7 +62,7 @@ export function Home() {
         <CoffeeCard />
         <CoffeeCard />
         <CoffeeCard />
-      </CoffeeList>
-    </HomeContainer>
+      </S.CoffeeList>
+    </S.HomeContainer>
   );
 }

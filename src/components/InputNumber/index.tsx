@@ -1,16 +1,16 @@
 import { Minus, Plus } from "phosphor-react";
-import { Button, InputNumberContainer } from "./styles";
+import * as S from "./styles";
 
 export function InputNumber() {
   return (
-    <InputNumberContainer>
-      <Button>
+    <S.InputNumberContainer>
+      <S.Button>
         <Minus weight="bold" />
-      </Button>
+      </S.Button>
       <span>1</span>
-      <Button>
+      <S.Button>
         <Plus weight="bold" />
-      </Button>
-    </InputNumberContainer>
+      </S.Button>
+    </S.InputNumberContainer>
   );
 }

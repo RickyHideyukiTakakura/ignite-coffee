@@ -6,47 +6,36 @@ import {
   Money,
   Trash,
 } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
 import CoffeeImage from "../../assets/express-coffee.png";
 import { InputNumber } from "../../components/InputNumber";
 import { InputText } from "../../components/InputText";
 import { Radio } from "../../components/Radio";
-import {
-  Address,
-  AddressAndPaymentContainer,
-  AddressForm,
-  AddressInfo,
-  Cart,
-  CheckoutContainer,
-  CoffeeActions,
-  CoffeeCardContainer,
-  CoffeeInfo,
-  ConfirmOrderButton,
-  DeleteCoffeeButton,
-  Payment,
-  PaymentInfo,
-  PaymentMethod,
-  SectionContainer,
-  Separator,
-  Total,
-} from "./styles";
+import * as S from "./styles";
 
 export function Checkout() {
+  const navigate = useNavigate();
+
+  function handleNavigateToSuccess() {
+    navigate("/success");
+  }
+
   return (
-    <CheckoutContainer>
-      <SectionContainer>
+    <S.CheckoutContainer>
+      <S.SectionContainer>
         <strong>Complete seu pedido</strong>
 
-        <AddressAndPaymentContainer>
-          <Address>
-            <AddressInfo>
+        <S.AddressAndPaymentContainer>
+          <S.Address>
+            <S.AddressInfo>
               <MapPin size={22} />
               <div>
                 <p>Endereço de Entrega</p>
                 <span>Informe o endereço onde deseja receber seu pedido</span>
               </div>
-            </AddressInfo>
+            </S.AddressInfo>
 
-            <AddressForm>
+            <S.AddressForm>
               <InputText className="zip-code" type="text" placeholder="CEP" />
               <InputText className="street" type="text" placeholder="Rua" />
               <InputText className="number" type="text" placeholder="Número" />
@@ -63,11 +52,11 @@ export function Checkout() {
               />
               <InputText className="city" type="text" placeholder="Cidade" />
               <InputText className="state" type="text" placeholder="UF" />
-            </AddressForm>
-          </Address>
+            </S.AddressForm>
+          </S.Address>
 
-          <Payment>
-            <PaymentInfo>
+          <S.Payment>
+            <S.PaymentInfo>
               <CurrencyDollar size={22} />
               <div>
                 <p>Pagamento</p>
@@ -76,9 +65,9 @@ export function Checkout() {
                   pagar
                 </span>
               </div>
-            </PaymentInfo>
+            </S.PaymentInfo>
 
-            <PaymentMethod>
+            <S.PaymentMethod>
               <Radio isSelected>
                 <CreditCard />
                 Cartão de crédito
@@ -91,65 +80,65 @@ export function Checkout() {
                 <Money />
                 Dinheiro
               </Radio>
-            </PaymentMethod>
-          </Payment>
-        </AddressAndPaymentContainer>
-      </SectionContainer>
+            </S.PaymentMethod>
+          </S.Payment>
+        </S.AddressAndPaymentContainer>
+      </S.SectionContainer>
 
-      <SectionContainer>
+      <S.SectionContainer>
         <strong>Cafés selecionados</strong>
-        <Cart>
+        <S.Cart>
           <>
-            <CoffeeCardContainer>
-              <CoffeeInfo>
+            <S.CoffeeCardContainer>
+              <S.CoffeeInfo>
                 <img src={CoffeeImage} alt="" />
 
                 <div>
                   <span>Expresso Tradicional</span>
 
-                  <CoffeeActions>
+                  <S.CoffeeActions>
                     <InputNumber />
 
-                    <DeleteCoffeeButton>
+                    <S.DeleteCoffeeButton>
                       <Trash size={16} />
                       Remover
-                    </DeleteCoffeeButton>
-                  </CoffeeActions>
+                    </S.DeleteCoffeeButton>
+                  </S.CoffeeActions>
                 </div>
-              </CoffeeInfo>
+              </S.CoffeeInfo>
 
               <strong>$ 9,90</strong>
-            </CoffeeCardContainer>
+            </S.CoffeeCardContainer>
 
-            <Separator />
+            <S.Separator />
           </>
 
           <>
-            <CoffeeCardContainer>
-              <CoffeeInfo>
+            <S.CoffeeCardContainer>
+              <S.CoffeeInfo>
                 <img src={CoffeeImage} alt="" />
 
                 <div>
                   <span>Expresso Tradicional</span>
 
-                  <CoffeeActions>
+                  <S.CoffeeActions>
                     <InputNumber />
 
-                    <DeleteCoffeeButton>
+                    <S.DeleteCoffeeButton>
                       <Trash size={16} />
                       REMOVER
-                    </DeleteCoffeeButton>
-                  </CoffeeActions>
+                    </S.DeleteCoffeeButton>
+                  </S.CoffeeActions>
                 </div>
-              </CoffeeInfo>
+              </S.CoffeeInfo>
 
               <strong>$ 9,90</strong>
-            </CoffeeCardContainer>
+            </S.CoffeeCardContainer>
 
-            <Separator />
+            <S.Separator />
           </>
 
-          <Total>
+          <S.Total>
             <div>
               <span>Total de itens</span>
               <span>R$ 29,70</span>
@@ -162,11 +151,13 @@ export function Checkout() {
               <strong>Total</strong>
               <strong>R$ 33,20</strong>
             </div>
-          </Total>
+          </S.Total>
 
-          <ConfirmOrderButton>Confirmar Pedido</ConfirmOrderButton>
-        </Cart>
-      </SectionContainer>
-    </CheckoutContainer>
+          <S.ConfirmOrderButton onClick={handleNavigateToSuccess}>
+            Confirmar Pedido
+          </S.ConfirmOrderButton>
+        </S.Cart>
+      </S.SectionContainer>
+    </S.CheckoutContainer>
   );
 }
