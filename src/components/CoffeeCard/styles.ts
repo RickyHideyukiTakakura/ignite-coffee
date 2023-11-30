@@ -22,17 +22,24 @@ export const CoffeeCardContainer = styled.div`
     margin-bottom: 0.75rem;
   }
 
-  & > strong {
-    padding: 0.25rem 0.5rem;
+  & > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem;
 
-    background: ${(props) => props.theme["yellow-light"]};
-    color: ${(props) => props.theme["yellow-dark"]};
+    & > strong {
+      padding: 0.25rem 0.5rem;
 
-    text-transform: uppercase;
-    font-size: 0.625rem;
-    line-height: 130%;
+      background: ${(props) => props.theme["yellow-light"]};
+      color: ${(props) => props.theme["yellow-dark"]};
 
-    border-radius: 100px;
+      text-transform: uppercase;
+      font-size: 0.625rem;
+      line-height: 130%;
+
+      border-radius: 100px;
+    }
   }
 
   h4 {

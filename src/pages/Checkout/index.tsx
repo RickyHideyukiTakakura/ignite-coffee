@@ -7,7 +7,7 @@ import {
   Trash,
 } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
-import CoffeeImage from "../../assets/express-coffee.png";
+// import CoffeeImage from "../../assets/coffees/express-coffee.png";
 import { InputNumber } from "../../components/InputNumber";
 import { InputText } from "../../components/InputText";
 import { Radio } from "../../components/Radio";
@@ -91,7 +91,7 @@ export function Checkout() {
           <>
             <S.CoffeeCardContainer>
               <S.CoffeeInfo>
-                <img src={CoffeeImage} alt="" />
+                <img src="" alt="" />
 
                 <div>
                   <span>Expresso Tradicional</span>
@@ -116,7 +116,7 @@ export function Checkout() {
           <>
             <S.CoffeeCardContainer>
               <S.CoffeeInfo>
-                <img src={CoffeeImage} alt="" />
+                <img src="" alt="" />
 
                 <div>
                   <span>Expresso Tradicional</span>
