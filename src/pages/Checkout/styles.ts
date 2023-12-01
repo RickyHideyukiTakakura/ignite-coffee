@@ -11,15 +11,14 @@ export const SectionContainer = styled.section`
   gap: 1rem;
 `;
 
-export const AddressAndPaymentContainer = styled.div`
+export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 `;
 
-export const Address = styled.div`
+export const AddressContainer = styled.div`
   width: 40rem;
-  height: 23.25rem;
 
   padding: 2.5rem;
 
@@ -27,9 +26,8 @@ export const Address = styled.div`
   background: ${(props) => props.theme["base-card"]};
 `;
 
-export const Payment = styled.div`
+export const PaymentContainer = styled.div`
   width: 40rem;
-  height: 13rem;
 
   padding: 2.5rem;
 
@@ -78,62 +76,6 @@ export const AddressInfo = styled(BaseInfo)`
 export const PaymentInfo = styled(BaseInfo)`
   svg {
     color: ${(props) => props.theme["purple"]};
-  }
-`;
-
-export const AddressForm = styled.form`
-  margin-top: 2rem;
-
-  display: grid;
-  grid-template-columns: 200px auto 60px;
-
-  gap: 1rem 0.75rem;
-
-  .zip-code {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .street {
-    grid-column: span 3;
-    grid-row: 2;
-  }
-
-  .number {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .complement {
-    grid-column: 2 / span 2;
-    grid-row: 3;
-  }
-
-  .neighborhood {
-    grid-column: 1;
-    grid-row: 4;
-  }
-
-  .city {
-    grid-column: 2;
-    grid-row: 4;
-  }
-
-  .state {
-    grid-column: 3;
-    grid-row: 4;
-  }
-`;
-
-export const PaymentMethod = styled.div`
-  margin-top: 2rem;
-
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-
-  div {
-    flex: 1;
   }
 `;
 
@@ -263,8 +205,6 @@ export const DeleteCoffeeButton = styled.button`
 export const Separator = styled.div`
   height: 1px;
   width: 100%;
-
-  /* margin: 1.5rem 0; */
 
   background: ${(props) => props.theme["base-button"]};
 `;

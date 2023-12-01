@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+`;
+
 export const InputTextContainer = styled.div`
   width: 100%;
 
@@ -38,4 +44,13 @@ export const InputTextContainer = styled.div`
 
     color: ${(props) => props.theme["base-label"]};
   }
+`;
+
+export const MessageError = styled.p`
+  padding-left: 0.75rem;
+
+  font-size: 0.75rem;
+  line-height: 130%;
+
+  color: red;
 `;
