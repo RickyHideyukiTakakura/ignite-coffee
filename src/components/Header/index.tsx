@@ -1,5 +1,5 @@
 import { MapPin, ShoppingCart } from "phosphor-react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo-coffee.svg";
 import * as S from "./styles";
 
@@ -12,9 +12,9 @@ export function Header() {
 
   return (
     <S.HeaderContainer>
-      <a href="/">
-        <img src={Logo} alt="" />
-      </a>
+      <NavLink to="/">
+        <img src={Logo} />
+      </NavLink>
 
       <S.Navigation>
         <S.Location>

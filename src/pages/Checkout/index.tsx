@@ -1,8 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CurrencyDollar, MapPin, Trash } from "phosphor-react";
+import { Fragment, useContext, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as zod from "zod";
 import { InputNumber } from "../../components/InputNumber";
+import { CoffeeContext } from "../../contexts/CoffeeContext";
 import { AddressForm } from "./AddressForm";
 import { PaymentMethod } from "./PaymentMethod";
 import * as S from "./styles";
@@ -20,10 +22,11 @@ const newOrderFormValidationSchema = zod.object({
   }),
 });
 
-type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>;
+export type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>;
 
 export function Checkout() {
-  // const navigate = useNavigate();
+  const { coffeesInCart, createNewOrder } = useContext(CoffeeContext);
+  const [quantity, setQuantity] = useState(1);
 
   const newOrderForm = useForm<NewOrderFormData>({
     resolver: zodResolver(newOrderFormValidationSchema),
@@ -34,24 +37,18 @@ export function Checkout() {
     formState: { errors },
   } = newOrderForm;
 
-  // function handleNavigateToSuccess() {
-  //   navigate("/success");
-  // }
-
   function handleCreateNewOrder(data: NewOrderFormData) {
-    console.log("aqui");
-    // const newOrder: NewOrderFormData = {
-    //   cep: data.cep,
-    //   street: data.street,
-    //   number: data.number,
-    //   complement: data.complement,
-    //   neighborhood: data.neighborhood,
-    //   city: data.city,
-    //   state: data.state,
-    //   paymentMethod: data.paymentMethod,
-    // };
+    createNewOrder(data);
+  }
 
-    console.log(data);
+  function handleDecreaseQuantity() {
+    if (quantity > 1) {
+      setQuantity((quantity) => quantity - 1);
+    }
+  }
+
+  function handleIncreaseQuantity() {
+    setQuantity((quantity) => quantity + 1);
   }
 
   return (
@@ -97,55 +94,38 @@ export function Checkout() {
       <S.SectionContainer>
         <strong>Cafés selecionados</strong>
         <S.Cart>
-          <>
-            <S.CoffeeCardContainer>
-              <S.CoffeeInfo>
-                <img src="" alt="" />
+          {coffeesInCart.map((coffee) => {
+            return (
+              <Fragment key={coffee.id}>
+                <S.CoffeeCardContainer>
+                  <S.CoffeeInfo>
+                    <img src={coffee.image} />
 
-                <div>
-                  <span>Expresso Tradicional</span>
+                    <div>
+                      <span>{coffee.title}</span>
 
-                  <S.CoffeeActions>
-                    <InputNumber />
+                      <S.CoffeeActions>
+                        <InputNumber
+                          handleDecreaseQuantity={handleDecreaseQuantity}
+                          handleIncreaseQuantity={handleIncreaseQuantity}
+                          quantity={quantity}
+                        />
 
-                    <S.DeleteCoffeeButton>
-                      <Trash size={16} />
-                      Remover
-                    </S.DeleteCoffeeButton>
-                  </S.CoffeeActions>
-                </div>
-              </S.CoffeeInfo>
+                        <S.DeleteCoffeeButton>
+                          <Trash size={16} />
+                          Remover
+                        </S.DeleteCoffeeButton>
+                      </S.CoffeeActions>
+                    </div>
+                  </S.CoffeeInfo>
 
-              <strong>$ 9,90</strong>
-            </S.CoffeeCardContainer>
+                  <strong>R$ {coffee.price.toFixed(2)}</strong>
+                </S.CoffeeCardContainer>
 
-            <S.Separator />
-          </>
-
-          <>
-            <S.CoffeeCardContainer>
-              <S.CoffeeInfo>
-                <img src="" alt="" />
-
-                <div>
-                  <span>Expresso Tradicional</span>
-
-                  <S.CoffeeActions>
-                    <InputNumber />
-
-                    <S.DeleteCoffeeButton>
-                      <Trash size={16} />
-                      REMOVER
-                    </S.DeleteCoffeeButton>
-                  </S.CoffeeActions>
-                </div>
-              </S.CoffeeInfo>
-
-              <strong>$ 9,90</strong>
-            </S.CoffeeCardContainer>
-
-            <S.Separator />
-          </>
+                <S.Separator />
+              </Fragment>
+            );
+          })}
 
           <S.Total>
             <div>

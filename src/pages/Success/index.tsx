@@ -1,8 +1,17 @@
 import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
+import { useContext } from "react";
 import DeliveryImage from "../../assets/delivery.png";
+import { CoffeeContext } from "../../contexts/CoffeeContext";
 import * as S from "./styles";
 
 export function Success() {
+  const { order } = useContext(CoffeeContext);
+  const paymentMethod = {
+    credit: "Cartão de crédito",
+    debit: "Cartão de débito",
+    cash: "Dinheiro",
+  };
+
   return (
     <S.SuccessContainer>
       <S.Order>
@@ -18,8 +27,13 @@ export function Success() {
                 <MapPin weight="fill" />
               </div>
               <span>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
-                <p>Farrapos - Porto Alegre, RS</p>
+                Entrega em{" "}
+                <strong>
+                  {order.street}, {order.number}
+                </strong>
+                <p>
+                  {order.neighborhood} - {order.city}, {order.state}
+                </p>
               </span>
             </S.InfoLocation>
 
@@ -39,7 +53,7 @@ export function Success() {
               </div>
               <span>
                 Pagamento na entrega
-                <strong>Cartão de Crédito</strong>
+                <strong>{paymentMethod[order.paymentMethod]}</strong>
               </span>
             </S.InfoPayment>
           </S.InfoContainer>

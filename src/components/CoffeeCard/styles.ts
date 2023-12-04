@@ -12,7 +12,6 @@ export const CoffeeCardContainer = styled.div`
   border-radius: 6px 36px 6px 36px;
 
   width: 16rem;
-  height: 19.375rem;
 
   img {
     width: 7.5rem;
@@ -22,9 +21,8 @@ export const CoffeeCardContainer = styled.div`
     margin-bottom: 0.75rem;
   }
 
-  & > div {
+  img + div {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: 0.25rem;
 
