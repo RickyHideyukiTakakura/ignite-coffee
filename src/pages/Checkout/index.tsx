@@ -25,7 +25,8 @@ const newOrderFormValidationSchema = zod.object({
 export type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>;
 
 export function Checkout() {
-  const { coffeesInCart, createNewOrder } = useContext(CoffeeContext);
+  const { coffeesInCart, removeCoffeeInCart, createNewOrder } =
+    useContext(CoffeeContext);
   const [quantity, setQuantity] = useState(1);
 
   const newOrderForm = useForm<NewOrderFormData>({
@@ -36,6 +37,12 @@ export function Checkout() {
     handleSubmit,
     formState: { errors },
   } = newOrderForm;
+
+  const shippingPrice = 3.5;
+
+  const totalItemsPrice = coffeesInCart.reduce((total, currentItem) => {
+    return total + currentItem.data.price * quantity;
+  }, 0);
 
   function handleCreateNewOrder(data: NewOrderFormData) {
     createNewOrder(data);
@@ -49,6 +56,10 @@ export function Checkout() {
 
   function handleIncreaseQuantity() {
     setQuantity((quantity) => quantity + 1);
+  }
+
+  function handleRemoveCoffee(coffeeId: string) {
+    removeCoffeeInCart(coffeeId);
   }
 
   return (
@@ -96,13 +107,13 @@ export function Checkout() {
         <S.Cart>
           {coffeesInCart.map((coffee) => {
             return (
-              <Fragment key={coffee.id}>
+              <Fragment key={coffee.data.id}>
                 <S.CoffeeCardContainer>
                   <S.CoffeeInfo>
-                    <img src={coffee.image} />
+                    <img src={coffee.data.image} />
 
                     <div>
-                      <span>{coffee.title}</span>
+                      <span>{coffee.data.title}</span>
 
                       <S.CoffeeActions>
                         <InputNumber
@@ -111,7 +122,9 @@ export function Checkout() {
                           quantity={quantity}
                         />
 
-                        <S.DeleteCoffeeButton>
+                        <S.DeleteCoffeeButton
+                          onClick={() => handleRemoveCoffee(coffee.data.id)}
+                        >
                           <Trash size={16} />
                           Remover
                         </S.DeleteCoffeeButton>
@@ -119,7 +132,7 @@ export function Checkout() {
                     </div>
                   </S.CoffeeInfo>
 
-                  <strong>R$ {coffee.price.toFixed(2)}</strong>
+                  <strong>R$ {coffee.data.price.toFixed(2)}</strong>
                 </S.CoffeeCardContainer>
 
                 <S.Separator />
@@ -130,15 +143,30 @@ export function Checkout() {
           <S.Total>
             <div>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>
+                {new Intl.NumberFormat("pt-br", {
+                  currency: "BRL",
+                  style: "currency",
+                }).format(totalItemsPrice)}
+              </span>
             </div>
             <div>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>
+                {new Intl.NumberFormat("pt-br", {
+                  currency: "BRL",
+                  style: "currency",
+                }).format(shippingPrice)}
+              </span>
             </div>
             <div>
               <strong>Total</strong>
-              <strong>R$ 33,20</strong>
+              <strong>
+                {new Intl.NumberFormat("pt-br", {
+                  currency: "BRL",
+                  style: "currency",
+                }).format(totalItemsPrice + shippingPrice)}
+              </strong>
             </div>
           </S.Total>
 

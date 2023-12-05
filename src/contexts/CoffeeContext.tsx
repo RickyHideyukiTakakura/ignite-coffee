@@ -1,14 +1,20 @@
-import { ReactNode, createContext, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ReactNode, createContext, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NewOrderFormData } from "../pages/Checkout";
 
-export interface CoffeeType {
+export interface CoffeeDataType {
   id: string;
   title: string;
   description: string;
   tags: string[];
   price: number;
   image: string;
+}
+
+export interface CoffeeType {
+  data: CoffeeDataType;
+  quantity: number;
 }
 
 interface CoffeeContextProviderProps {
@@ -18,7 +24,9 @@ interface CoffeeContextProviderProps {
 interface CoffeeContextType {
   coffeesInCart: CoffeeType[];
   order: NewOrderFormData;
-  addCoffeeInCart: (data: CoffeeType) => void;
+
+  addCoffeeInCart: (data: CoffeeDataType, quantity: number) => void;
+  removeCoffeeInCart: (coffeeId: string) => void;
   createNewOrder: (data: NewOrderFormData) => void;
 }
 
@@ -29,11 +37,45 @@ export function CoffeeContextProvider({
 }: CoffeeContextProviderProps) {
   const navigate = useNavigate();
 
-  const [coffeesInCart, setCoffeesInCart] = useState<CoffeeType[]>([]);
+  const [coffeesInCart, dispatch] = useReducer(
+    (state: CoffeeType[], action: any) => {
+      if (action.type === "ADD_COFFEE_IN_CART") {
+        return [...state, action.payload.newCoffeeInCart];
+      }
+
+      if (action.type === "REMOVE_COFFEE_IN_CART") {
+        return state.filter(
+          (coffee) => coffee.data.id !== action.payload.coffeeId
+        );
+      }
+
+      return state;
+    },
+    []
+  );
   const [order, setOrder] = useState({} as NewOrderFormData);
 
-  function addCoffeeInCart(data: CoffeeType) {
-    setCoffeesInCart((state) => [...state, data]);
+  function addCoffeeInCart(data: CoffeeDataType, quantity: number) {
+    const newCoffeeInCart = {
+      data,
+      quantity,
+    };
+
+    dispatch({
+      type: "ADD_COFFEE_IN_CART",
+      payload: {
+        newCoffeeInCart,
+      },
+    });
+  }
+
+  function removeCoffeeInCart(coffeeId: string) {
+    dispatch({
+      type: "REMOVE_COFFEE_IN_CART",
+      payload: {
+        coffeeId,
+      },
+    });
   }
 
   function createNewOrder(data: NewOrderFormData) {
@@ -55,7 +97,13 @@ export function CoffeeContextProvider({
 
   return (
     <CoffeeContext.Provider
-      value={{ coffeesInCart, addCoffeeInCart, createNewOrder, order }}
+      value={{
+        coffeesInCart,
+        addCoffeeInCart,
+        removeCoffeeInCart,
+        createNewOrder,
+        order,
+      }}
     >
       {children}
     </CoffeeContext.Provider>
