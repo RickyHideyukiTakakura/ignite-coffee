@@ -1,6 +1,6 @@
 import { ShoppingCart } from "phosphor-react";
 import { useContext, useState } from "react";
-import { CoffeeContext } from "../../contexts/CoffeeContext";
+import { CartContext } from "../../contexts/CartContext";
 import { InputNumber } from "../InputNumber";
 import * as S from "./styles";
 
@@ -16,7 +16,7 @@ export interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
-  const { addCoffeeInCart } = useContext(CoffeeContext);
+  const { addCoffeeInCart } = useContext(CartContext);
 
   const [quantity, setQuantity] = useState(1);
 

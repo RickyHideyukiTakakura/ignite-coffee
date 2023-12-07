@@ -1,11 +1,11 @@
 import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
 import { useContext } from "react";
 import DeliveryImage from "../../assets/delivery.png";
-import { CoffeeContext } from "../../contexts/CoffeeContext";
+import { CartContext } from "../../contexts/CartContext";
 import * as S from "./styles";
 
 export function Success() {
-  const { order } = useContext(CoffeeContext);
+  const { order } = useContext(CartContext);
   const paymentMethod = {
     credit: "Cartão de crédito",
     debit: "Cartão de débito",

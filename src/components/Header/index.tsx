@@ -2,11 +2,11 @@ import { MapPin, ShoppingCart } from "phosphor-react";
 import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo-coffee.svg";
-import { CoffeeContext } from "../../contexts/CoffeeContext";
+import { CartContext } from "../../contexts/CartContext";
 import * as S from "./styles";
 
 export function Header() {
-  const { coffeesInCart } = useContext(CoffeeContext);
+  const { coffeesInCart } = useContext(CartContext);
 
   const navigate = useNavigate();
 

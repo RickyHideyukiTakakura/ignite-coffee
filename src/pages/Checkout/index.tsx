@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CurrencyDollar, MapPin, Trash } from "phosphor-react";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as zod from "zod";
 import { InputNumber } from "../../components/InputNumber";
-import { CoffeeContext } from "../../contexts/CoffeeContext";
+import { CartContext } from "../../contexts/CartContext";
 import { AddressForm } from "./AddressForm";
 import { PaymentMethod } from "./PaymentMethod";
 import * as S from "./styles";
@@ -25,9 +25,13 @@ const newOrderFormValidationSchema = zod.object({
 export type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>;
 
 export function Checkout() {
-  const { coffeesInCart, removeCoffeeInCart, createNewOrder } =
-    useContext(CoffeeContext);
-  const [quantity, setQuantity] = useState(1);
+  const {
+    coffeesInCart,
+    removeCoffeeInCart,
+    increaseQuantity,
+    decreaseQuantity,
+    createNewOrder,
+  } = useContext(CartContext);
 
   const newOrderForm = useForm<NewOrderFormData>({
     resolver: zodResolver(newOrderFormValidationSchema),
@@ -41,21 +45,19 @@ export function Checkout() {
   const shippingPrice = 3.5;
 
   const totalItemsPrice = coffeesInCart.reduce((total, currentItem) => {
-    return total + currentItem.data.price * quantity;
+    return total + currentItem.data.price * currentItem.quantity;
   }, 0);
 
   function handleCreateNewOrder(data: NewOrderFormData) {
     createNewOrder(data);
   }
 
-  function handleDecreaseQuantity() {
-    if (quantity > 1) {
-      setQuantity((quantity) => quantity - 1);
-    }
+  function handleDecreaseQuantity(coffeeId: string) {
+    decreaseQuantity(coffeeId);
   }
 
-  function handleIncreaseQuantity() {
-    setQuantity((quantity) => quantity + 1);
+  function handleIncreaseQuantity(coffeeId: string) {
+    increaseQuantity(coffeeId);
   }
 
   function handleRemoveCoffee(coffeeId: string) {
@@ -117,9 +119,13 @@ export function Checkout() {
 
                       <S.CoffeeActions>
                         <InputNumber
-                          handleDecreaseQuantity={handleDecreaseQuantity}
-                          handleIncreaseQuantity={handleIncreaseQuantity}
-                          quantity={quantity}
+                          handleDecreaseQuantity={() =>
+                            handleDecreaseQuantity(coffee.data.id)
+                          }
+                          handleIncreaseQuantity={() =>
+                            handleIncreaseQuantity(coffee.data.id)
+                          }
+                          quantity={coffee.quantity}
                         />
 
                         <S.DeleteCoffeeButton
