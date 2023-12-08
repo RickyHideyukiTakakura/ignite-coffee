@@ -1,7 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactNode, createContext, useReducer, useState } from "react";
+import { ReactNode, createContext, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { NewOrderFormData } from "../pages/Checkout";
+import {
+  addCoffeeInCartAction,
+  decreaseCoffeeQuantityAction,
+  increaseCoffeeQuantityAction,
+  newOrderAction,
+  removeCoffeeInCartAction,
+} from "../reducers/cart/actions";
+import { cartReducer } from "../reducers/cart/reducer";
 
 export interface CoffeeDataType {
   id: string;
@@ -15,11 +23,6 @@ export interface CoffeeDataType {
 export interface CoffeeType {
   data: CoffeeDataType;
   quantity: number;
-}
-
-interface CartState {
-  coffeesInCart: CoffeeType[];
-  order: NewOrderFormData | null;
 }
 
 interface CartContextProviderProps {
@@ -42,101 +45,12 @@ export const CartContext = createContext({} as CartContextType);
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const navigate = useNavigate();
 
-  const [cartState, dispatch] = useReducer(
-    (state: CartState, action: any) => {
-      // switch (action.type) {
-      //   case 'ADD_COFFEE_IN_CART':
-      //   case 'REMOVE_COFFEE_IN_CART':
-      //   case 'INCREASE_COFFEE_QUANTITY':
-      //   case 'DECREASE_COFFEE_QUANTITY':
-      //   case 'NEW_ORDER':
-      //   default:
-      //     return state
-      // }
+  const [cartState, dispatch] = useReducer(cartReducer, {
+    coffeesInCart: [],
+    order: null,
+  });
 
-      if (action.type === "ADD_COFFEE_IN_CART") {
-        const itemAlreadyInCart = state.coffeesInCart.find(
-          (coffee) => coffee.data.id === action.payload.newCoffeeInCart.data.id
-        );
-
-        if (itemAlreadyInCart) {
-          return {
-            ...state,
-            coffeesInCart: state.coffeesInCart.map((coffee) =>
-              coffee.data.id === action.payload.newCoffeeInCart.data.id
-                ? {
-                    ...coffee,
-                    quantity:
-                      coffee.quantity + action.payload.newCoffeeInCart.quantity,
-                  }
-                : coffee
-            ),
-          };
-        } else {
-          return {
-            ...state,
-            coffeesInCart: [
-              ...state.coffeesInCart,
-              action.payload.newCoffeeInCart,
-            ],
-          };
-        }
-      }
-
-      if (action.type === "REMOVE_COFFEE_IN_CART") {
-        return {
-          ...state,
-          coffeesInCart: state.coffeesInCart.filter(
-            (coffee) => coffee.data.id !== action.payload.coffeeId
-          ),
-        };
-      }
-
-      if (action.type === "INCREASE_COFFEE_QUANTITY") {
-        return {
-          ...state,
-          coffeesInCart: state.coffeesInCart.map((coffee) => {
-            if (coffee.data.id === action.payload.coffeeId) {
-              return {
-                ...coffee,
-                quantity: coffee.quantity + 1,
-              };
-            }
-
-            return coffee;
-          }),
-        };
-      }
-
-      if (action.type === "DECREASE_COFFEE_QUANTITY") {
-        return {
-          ...state,
-          coffeesInCart: state.coffeesInCart.map((coffee) => {
-            if (
-              coffee.data.id === action.payload.coffeeId &&
-              coffee.quantity > 1
-            ) {
-              return {
-                ...coffee,
-                quantity: coffee.quantity - 1,
-              };
-            }
-
-            return coffee;
-          }),
-        };
-      }
-
-      return state;
-    },
-    {
-      coffeesInCart: [],
-      order: null,
-    }
-  );
-
-  const { coffeesInCart } = cartState;
-  const [order, setOrder] = useState({} as NewOrderFormData);
+  const { coffeesInCart, order } = cartState;
 
   function addCoffeeInCart(data: CoffeeDataType, quantity: number) {
     const newCoffeeInCart = {
@@ -144,39 +58,19 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       quantity,
     };
 
-    dispatch({
-      type: "ADD_COFFEE_IN_CART",
-      payload: {
-        newCoffeeInCart,
-      },
-    });
+    dispatch(addCoffeeInCartAction(newCoffeeInCart));
   }
 
   function removeCoffeeInCart(coffeeId: string) {
-    dispatch({
-      type: "REMOVE_COFFEE_IN_CART",
-      payload: {
-        coffeeId,
-      },
-    });
+    dispatch(removeCoffeeInCartAction(coffeeId));
   }
 
   function increaseQuantity(coffeeId: string) {
-    dispatch({
-      type: "INCREASE_COFFEE_QUANTITY",
-      payload: {
-        coffeeId,
-      },
-    });
+    dispatch(increaseCoffeeQuantityAction(coffeeId));
   }
 
   function decreaseQuantity(coffeeId: string) {
-    dispatch({
-      type: "DECREASE_COFFEE_QUANTITY",
-      payload: {
-        coffeeId,
-      },
-    });
+    dispatch(decreaseCoffeeQuantityAction(coffeeId));
   }
 
   function createNewOrder(data: NewOrderFormData) {
@@ -191,7 +85,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       paymentMethod: data.paymentMethod,
     };
 
-    setOrder(newOrder);
+    dispatch(newOrderAction(newOrder));
 
     navigate("/success");
   }

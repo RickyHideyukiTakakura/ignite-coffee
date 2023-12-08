@@ -1,4 +1,5 @@
-import { CoffeeDataType } from "./reducer";
+import { NewOrderFormData } from "../../pages/Checkout";
+import { CoffeeType } from "./reducer";
 
 export enum ActionTypes {
   ADD_COFFEE_IN_CART = "ADD_COFFEE_IN_CART",
@@ -8,35 +9,47 @@ export enum ActionTypes {
   NEW_ORDER = "NEW_ORDER",
 }
 
-export function addCoffeeInCartAction(coffee: CoffeeDataType) {
+export function addCoffeeInCartAction(newCoffeeInCart: CoffeeType) {
   return {
     type: ActionTypes.ADD_COFFEE_IN_CART,
     payload: {
-      coffee,
+      newCoffeeInCart,
     },
   };
 }
 
-export function removeCoffeeInCartAction() {
+export function removeCoffeeInCartAction(coffeeId: string) {
   return {
     type: ActionTypes.REMOVE_COFFEE_IN_CART,
+    payload: {
+      coffeeId,
+    },
   };
 }
 
-export function increaseCoffeeQuantityAction() {
+export function increaseCoffeeQuantityAction(coffeeId: string) {
   return {
     type: ActionTypes.INCREASE_COFFEE_QUANTITY,
+    payload: {
+      coffeeId,
+    },
   };
 }
 
-export function decreaseCoffeeQuantityAction() {
+export function decreaseCoffeeQuantityAction(coffeeId: string) {
   return {
     type: ActionTypes.DECREASE_COFFEE_QUANTITY,
+    payload: {
+      coffeeId,
+    },
   };
 }
 
-export function newOrderAction() {
+export function newOrderAction(newOrder: NewOrderFormData) {
   return {
     type: ActionTypes.NEW_ORDER,
+    payload: {
+      newOrder,
+    },
   };
 }

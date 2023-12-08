@@ -49,6 +49,10 @@ export function Checkout() {
   }, 0);
 
   function handleCreateNewOrder(data: NewOrderFormData) {
+    if (coffeesInCart.length === 0) {
+      return alert("O carrinho está vazio");
+    }
+
     createNewOrder(data);
   }
 
