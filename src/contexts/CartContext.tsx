@@ -31,7 +31,7 @@ interface CartContextProviderProps {
 
 interface CartContextType {
   coffeesInCart: CoffeeType[];
-  order: NewOrderFormData;
+  order: NewOrderFormData | null;
 
   addCoffeeInCart: (data: CoffeeDataType, quantity: number) => void;
   removeCoffeeInCart: (coffeeId: string) => void;

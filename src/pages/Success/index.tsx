@@ -12,6 +12,10 @@ export function Success() {
     cash: "Dinheiro",
   };
 
+  if (!order) {
+    return null;
+  }
+
   return (
     <S.SuccessContainer>
       <S.Order>
