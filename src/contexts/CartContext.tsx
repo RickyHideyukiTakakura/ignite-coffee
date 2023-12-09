@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactNode, createContext, useReducer } from "react";
+import { ReactNode, createContext, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { NewOrderFormData } from "../pages/Checkout";
 import {
@@ -45,10 +45,24 @@ export const CartContext = createContext({} as CartContextType);
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const navigate = useNavigate();
 
-  const [cartState, dispatch] = useReducer(cartReducer, {
-    coffeesInCart: [],
-    order: null,
-  });
+  const [cartState, dispatch] = useReducer(
+    cartReducer,
+    {
+      coffeesInCart: [],
+      order: null,
+    },
+    (initialState) => {
+      const storedStateAsJSON = localStorage.getItem(
+        "@ignite-coffee:cart-state-1.0.0"
+      );
+
+      if (storedStateAsJSON) {
+        return JSON.parse(storedStateAsJSON);
+      }
+
+      return initialState;
+    }
+  );
 
   const { coffeesInCart, order } = cartState;
 
@@ -89,6 +103,12 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
     navigate("/success");
   }
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cartState);
+
+    localStorage.setItem("@ignite-coffee:cart-state-1.0.0", stateJSON);
+  }, [cartState]);
 
   return (
     <CartContext.Provider
