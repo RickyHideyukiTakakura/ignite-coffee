@@ -1,30 +1,45 @@
-# React + TypeScript + Vite
+# Ignite Coffee
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Projeto desenvolvido no desafio 02 no curso de ReactJS do Ignite da Rocketseat
 
-Currently, two official plugins are available:
+## Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-## Expanding the ESLint configuration
+- [React](https://react.dev/)
+- [Styled-Components](https://styled-components.com/)
+- [React Router Dom](https://reactrouter.com/en/main)
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Previews
 
-- Configure the top-level `parserOptions` property like this:
+- Home
+  ![Home Page](./public/previews/Home.png)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Cart
+  ![Cart Page](./public/previews/Cart.png)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Success
+  ![Success Page](./public/previews/Success.png)
+
+## Layout
+
+É possível visualizar o layout do projeto através [desse link](<https://www.figma.com/file/HGjJIu814pXklrM67hKI6H/Coffee-Delivery-%E2%80%A2-Desafio-React-(Copy)?type=design&node-id=0-1&mode=design&t=ZRWVmz9RF8pK1NKt-0>). É necessário possuir uma conta no Figma.
+
+## Instalação
+
+1. git clone https://github.com/RickyHideyukiTakakura/ignite-coffee
+2. cd ignite-coffee
+3. npm install ou yarn install
+
+## Projeto
+
+Este é um site que simula um delivery, podendo adicionar cafés ao carrinho e confirmar o pedido informando o endereço e forma de pagamento.
+
+### O objetivo da criação do projeto é exercitar conceitos do React como:
+
+- Routes
+- Forms
+- Context
+- Reducer
